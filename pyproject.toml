@@ -7,25 +7,26 @@ authors = [
     "WebSpider <bacardicoke@gmail.com>",
     "Fabrice Devaux <fabrice.devaux@gmail.com>",
 ]
+packages = [{ include = "myskoda" }]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 aiohttp = "^3"
 aiomqtt = "^2.0"
-asyncclick = { version = "^8.1.7.2", optional = true }
 asyncio = "^3"
-coloredlogs = { version = "^15.0.1", optional = true }
 paho-mqtt = "^1"
 pyjwt = "^2"
 python = ">=3.12.0, <4.0"
 pyyaml = "^6"
-termcolor = { version = "^2.4.0", optional = true }
 mashumaro = { extras = ["orjson"], version = "^3.13.1" }
 mkdocs = { extras = ["gen-files"], version = "^1.6.1", optional = true }
 mkdocstrings = { extras = ["python"], version = ">=0.26.1,<0.29.0", optional = true }
 mkdocs-gen-files = { version = "^0.5.0", optional = true }
 mkdocs-literate-nav = { version = "^0.6.1", optional = true }
-pygments = { version = "^2.18.0", optional = true }
+asyncclick = "^8.1.8"
+coloredlogs = "^15.0.1"
+termcolor = "^2.5.0"
+pygments = "^2.19.1"
 
 [tool.poetry.group.dev.dependencies]
 pyright = "^1.1.379"
