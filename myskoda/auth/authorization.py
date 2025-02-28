@@ -102,13 +102,13 @@ class Authorization:
         params = {
             "client_id": CLIENT_ID,
             "nonce": self.generate_nonce(),
-            "redirect_uri": "myskoda://redirect/login/",
-            "response_type": "code id_token",
+            "redirect_uri": "seat://oauth-callback",
+            "response_type": "code",
             # OpenID scopes. Can be found here: https://identity.vwgroup.io/.well-known/openid-configuration
-            "scope": "address badge birthdate cars driversLicense dealers email mileage mbb nationalIdentifier openid phone profession profile vin",  # noqa: E501
+            "scope": "openid profile nickname birthdate phone",  # noqa: E501
             "code_challenge": challenge,
             "code_challenge_method": "s256",
-            "prompt": "login",
+            # "prompt": "login",
         }
         async with self.session.get(
             f"{BASE_URL_IDENT}/oidc/v1/authorize", params=params
@@ -137,20 +137,20 @@ class Authorization:
         """Third step in the login process.
 
         Post both the email address and the password to the backend.
-        This will return a token which can then be used in the skoda services to authenticate.
+        This will return a token which can then be used in the seat services to authenticate.
         """
         form_data = FormData()
+        form_data.add_field("_csrf", csrf.csrf)
         form_data.add_field("relayState", csrf.template_model.relay_state)
         form_data.add_field("email", self.email)
         form_data.add_field("password", self.password)
         form_data.add_field("hmac", csrf.template_model.hmac)
-        form_data.add_field("_csrf", csrf.csrf)
 
         # The following is a bit hacky:
         # The backend will redirect multiple times after the login was successful.
-        # The last redirect will redirect back to the `MySkoda` app in Android,
-        # using the `myskoda://` URL prefix.
-        # The following loop will follow all redirects until the last redirect to `myskoda://` is
+        # The last redirect will redirect back to the `MySeat` app in Android,
+        # using the `seat://` URL prefix.
+        # The following loop will follow all redirects until the last redirect to `seat://` is
         # encountered. This last URL will contain the token.
         try:
             async with self.session.post(
@@ -160,19 +160,19 @@ class Authorization:
                 raise_for_status=True,
             ) as auth_response:
                 location = auth_response.headers["Location"]
-                while not location.startswith("myskoda://"):
+                while not location.startswith("seat://"):
                     if "terms-and-conditions" in location:
                         raise TermsAndConditionsError(location)
                     if "consent/marketing" in location:
                         raise MarketingConsentError(location)
                     async with self.session.get(location, allow_redirects=False) as response:
                         location = response.headers["Location"]
-                codes = location.replace("myskoda://redirect/login/#", "")
+                codes = location.replace("seat://oauth-callback/#", "")
         except InvalidUrlClientError:
             _LOGGER.exception("Error occurred while sending password. Password may be incorrect.")
             raise
 
-        # The last redirection starting with `myskoda://` was encountered.
+        # The last redirection starting with `seat://` was encountered.
         # The URL will contain the information we need as query parameters,
         # without the leading `?`.
         data = {}
@@ -189,7 +189,7 @@ class Authorization:
         """
         json_data = {
             "code": code,
-            "redirectUri": "myskoda://redirect/login/",
+            "redirectUri": "seat://oauth-callback/",
             "verifier": verifier,
         }
 
@@ -242,6 +242,7 @@ class Authorization:
         if not self.is_token_expired():
             return True
 
+# I think this is differnt
         async with self.session.post(
             f"{BASE_URL_SKODA}/api/v1/authentication/refresh-token?tokenType=CONNECT",
             json={"token": self.idk_session.refresh_token},

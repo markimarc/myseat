@@ -9,7 +9,7 @@ from asyncclick.core import Context
 from myskoda.cli.utils import mqtt_required
 
 if TYPE_CHECKING:
-    from myskoda import MySkoda
+    from myseat import MySeat
 
 from myskoda.models.air_conditioning import (
     AirConditioningAtUnlock,

@@ -1,9 +1,9 @@
 """Common constants."""
 
-# Client id extracted from the MySkoda Android app.
-CLIENT_ID = "7f045eee-7003-4379-9968-9355ed2adb06@apps_vw-dilab_com"
+# Client id extracted from the MySeat Android app.
+CLIENT_ID = "99a5b77d-bd88-4d53-b4e5-a539c60694a3@apps_vw-dilab_com"
 
-BASE_URL_SKODA = "https://mysmob.api.connect.skoda-auto.cz"
+BASE_URL_SKODA = "https://ola.prod.code.seat.cloud.vwgroup.com"
 BASE_URL_IDENT = "https://identity.vwgroup.io"
 
 MQTT_BROKER_HOST = "mqtt.messagehub.de"

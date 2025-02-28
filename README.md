@@ -1,26 +1,8 @@
-[![Version](https://img.shields.io/github/v/release/skodaconnect/myskoda?include_prereleases)](https://github.com/skodaconnect/myskoda/releases)
-[![PyPi](https://img.shields.io/pypi/v/myskoda?label=latest%20pypi)](https://pypi.org/project/myskoda/)
-[![Downloads PyPi](https://img.shields.io/pypi/dm/myskoda)](https://pypi.org/project/myskoda/)
-[![Docs](https://readthedocs.org/projects/myskoda/badge/?version=latest)](https://myskoda.readthedocs.io/en/latest/)
-[![Discord](https://img.shields.io/discord/877164727636230184)](https://discord.gg/t7az2hSJXq)
-[![Coverage Status](https://coveralls.io/repos/github/skodaconnect/myskoda/badge.svg)](https://coveralls.io/github/skodaconnect/myskoda)
+# Work in progress! Not working yet!
 
-# MySkoda
+# MySeat
 
-This Python library can be used to work with the MySkoda API.
-<!-- TOC -->
-
-- [MySkoda](#myskoda)
-  - [Get In Touch](#get-in-touch)
-  - [Quick Start](#quick-start)
-    - [Basic example](#basic-example)
-  - [Documentation](#documentation)
-  - [As Library](#as-library)
-  - [As CLI](#as-cli)
-  - [Contribute your Fixtures](#contribute-your-fixtures)
-  - [Disclaimer](#disclaimer)
-
-<!-- /TOC -->
+This Python library can be used to work with the MySeat API.
 
 ## Get In Touch
 

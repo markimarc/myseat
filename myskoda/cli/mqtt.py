@@ -13,7 +13,7 @@ from myskoda.models.operation_request import OperationName
 from myskoda.myskoda import MqttDisabledError
 
 if TYPE_CHECKING:
-    from myskoda import MySkoda
+    from myseat import MySeat
 
 
 @click.command()

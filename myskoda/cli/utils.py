@@ -15,7 +15,7 @@ from pygments.formatters import TerminalFormatter
 from pygments.lexers import JsonLexer, YamlLexer
 
 if TYPE_CHECKING:
-    from myskoda import MySkoda
+    from myseat import MySeat
 
 
 async def handle_request(ctx: Context, func: Callable[..., Awaitable], *args: Any) -> None:  # noqa: ANN401
